@@ -4,6 +4,16 @@ function noInputtedWord(word, text) {
   return ((text.trim().length === 0) || (word.trim().length === 0));
 }
 
+function addWordCount(array, word) {
+  let wordCount = 0
+  array.forEach(function(element) {
+    if (element.toLowerCase().includes(word.toLowerCase())) {
+      wordCount++
+    }
+  });
+  return wordCount;
+}
+
 //Business Logic
 
 function wordCounter(text) { 
@@ -38,16 +48,53 @@ function numberOfOccurrencesInText(word, text) {
     return 0;
   }
   const wordArray = text.split(" ");
-  let wordCount = 0;
-  wordArray.forEach(function(element) {
-    if (element.toLowerCase().includes(word.toLowerCase())) {
-      wordCount++
-    }
-  });
-  return wordCount;
-
+  return addWordCount(wordArray, word);
 }
-// UI Logic
+
+function commonWord(text){
+  const wordArray = text.split(" ");
+  const count = {};
+  const result = [];
+
+  wordArray.forEach(item => {
+      if (count[item]) {
+        count[item] +=1;
+        return;
+      }
+      count[item] = 1;
+  })
+
+  for (let prop in count){
+      if (count[prop] >=2){
+          result.push(prop);
+      }
+  }
+  console.log(count);
+  
+  str = JSON.stringify(count);
+  str = JSON.stringify(count, null, 4);
+  return str;
+}
+
+function newCommonWord(text){
+  const wordArray = text.split(" ");
+  const noDupeArray = [...new Set(wordArray)]
+  let wordCount = 0;
+  let newString = "<ul>";
+  noDupeArray.forEach(function(element) {
+    newString = newString.concat("<li>", element, ": ", addWordCount(wordArray, element), "</li>");
+  });
+  return newString + "</ul>";
+}
+
+//UI Logic
+
+$(document).ready(function(){
+  $("button#btn").click(function() {
+      $('#common-count').children("a:nth-child(1)").remove();
+    });
+  });
+
 
 function boldPassage(word, text) {
   if (noInputtedWord(word, text)) {
@@ -78,5 +125,6 @@ $(document).ready(function(){
     $("#total-count").html(wordCount);
     $("#selected-count").html(occurrencesOfWord);
     $("#bolded-passage").html(boldPassage(word, passage));
+    $("#common-count").html(newCommonWord(passage));
   });
 });
