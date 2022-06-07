@@ -30,7 +30,6 @@ function wordCounter(text) {
   return wordCount;
 };
 
-
 function omitFoulLanguage(text) {
   const wordArray = text.split(" ");
   wordArray.forEach(function(element) {
@@ -51,30 +50,30 @@ function numberOfOccurrencesInText(word, text) {
   return addWordCount(wordArray, word);
 }
 
-function commonWord(text){
-  const wordArray = text.split(" ");
-  const count = {};
-  const result = [];
+// function commonWord(text){
+//   const wordArray = text.split(" ");
+//   const count = {};
+//   const result = [];
 
-  wordArray.forEach(item => {
-      if (count[item]) {
-        count[item] +=1;
-        return;
-      }
-      count[item] = 1;
-  })
+//   wordArray.forEach(item => {
+//       if (count[item]) {
+//         count[item] +=1;
+//         return;
+//       }
+//       count[item] = 1;
+//   })
 
-  for (let prop in count){
-      if (count[prop] >=2){
-          result.push(prop);
-      }
-  }
-  console.log(count);
+//   for (let prop in count){
+//       if (count[prop] >=2){
+//           result.push(prop);
+//       }
+//   }
+//   console.log(count);
   
-  str = JSON.stringify(count);
-  str = JSON.stringify(count, null, 4);
-  return str;
-}
+//   str = JSON.stringify(count);
+//   str = JSON.stringify(count, null, 4);
+//   return str;
+// }
 
 function newCommonWord(text){
   const wordArray = text.split(" ");
@@ -91,7 +90,7 @@ function newCommonWord(text){
 
 $(document).ready(function(){
   $("button#btn").click(function() {
-      $('#common-count').children("a:nth-child(1)").remove();
+      $('#common-count').children("li:nth-child(1)").remove();
     });
   });
 
@@ -126,5 +125,6 @@ $(document).ready(function(){
     $("#selected-count").html(occurrencesOfWord);
     $("#bolded-passage").html(boldPassage(word, passage));
     $("#common-count").html(newCommonWord(passage));
+    $("#foul-language").html(omitFoulLanguage(passage));
   });
 });
