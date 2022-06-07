@@ -67,6 +67,5 @@ Describe: omitFoulLanguage()
 Test: "Should omit any instances of zoinks, muppeteer, biffaroni, and loopdaloop"
 Code:
 const text = "Zoinks shaggy, look at that loopdaloop!"
-const word = 'zoinks, muppeteer, biffaroni, loopdaloop'
 omitFoulLanguage(text);
-Expected Output: "&%#@ shaggy, look at that $#@&!"  
+Expected Output: "shaggy, look at that"  
