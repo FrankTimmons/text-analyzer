@@ -14,6 +14,60 @@ function addWordCount(array, word) {
   return wordCount;
 }
 
+//For loop!
+
+
+function countUpBy(countTo, countBy) {
+
+  if (noInputtedWord(countTo, countBy)) {
+    return "Please input 2 numbers";
+  }
+
+  const parsedBy = parseInt(countBy);
+  const parsedTo = parseInt(countTo);
+	let stringOfNums = "";
+
+  if (isNaN(parsedBy) || isNaN(parsedTo)){
+    return "please enter a number";
+  }
+  
+  if (Math.sign(parsedBy) === 1 && Math.sign(parsedTo) === 1){
+    if (parsedTo < parsedBy){
+      return "Please enter valid positive numbers";
+    }
+    for (let i = parsedBy; i <= parsedTo; i += parsedBy) {
+      if (i < parsedTo) {
+    	  stringOfNums = stringOfNums.concat(i, ", ");
+      }else {
+        stringOfNums = stringOfNums.concat(i);
+      }
+    }
+    return stringOfNums;
+
+  }else if (Math.sign(parsedBy) === -1 && Math.sign(parsedTo) === -1){
+    if (parsedTo > parsedBy){
+      return "Please enter valid negative numbers";
+    }
+    for (let i = parsedBy; i >= parsedTo; i += parsedBy) {
+      if (i > parsedTo) {
+    	  stringOfNums = stringOfNums.concat(i, ", ");
+      }else {
+        stringOfNums = stringOfNums.concat(i);
+      }
+    }
+    return stringOfNums;
+
+  }else if (Math.sign(parsedBy) === -1 && Math.sign(parsedTo) === 1){
+    return "Please set your max number to a negative if you're counting by a negative";
+    
+  }else if (Math.sign(parsedBy) === 1 && Math.sign(parsedTo) === -1){
+    return "Please set your max number to a positive if you're counting by a positive";
+  } 
+}
+
+
+// countUpBy("-30","-5");
+
 //Business Logic
 
 function wordCounter(text) { 
@@ -75,6 +129,8 @@ function numberOfOccurrencesInText(word, text) {
 //   return str;
 // }
 
+//UI Logic
+
 function newCommonWord(text){
   const wordArray = text.split(" ");
   const noDupeArray = [...new Set(wordArray)]
@@ -85,8 +141,6 @@ function newCommonWord(text){
   });
   return newString + "</ul>";
 }
-
-//UI Logic
 
 $(document).ready(function(){
   $("button#btn").click(function() {
