@@ -1,7 +1,13 @@
 //Utility Logic
 
-function noInputtedWord(word, text) {
-  return ((text.trim().length === 0) || (word.trim().length === 0));
+function noInputtedWord() {
+  for (let i=0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+    if (arguments[i].trim().length === 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function addWordCount(array, word) {
@@ -30,7 +36,7 @@ function countUpBy(countTo, countBy) {
   if (isNaN(parsedBy) || isNaN(parsedTo)){
     return "please enter a number";
   }
-  
+
   if (Math.sign(parsedBy) === 1 && Math.sign(parsedTo) === 1){
     if (parsedTo < parsedBy){
       return "Please enter valid positive numbers";
@@ -71,7 +77,7 @@ function countUpBy(countTo, countBy) {
 //Business Logic
 
 function wordCounter(text) { 
-  if (text.trim().length === 0) {
+  if (noInputtedWord(text)) {
     return 0;
   }
   const wordArray = text.split(" ");
